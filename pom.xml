@@ -1,0 +1,91 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.dtdsoftware</groupId>
+    <artifactId>splunk-logging</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>splunk-logging</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <dependency.splunk.version>0.8.1</dependency.splunk.version>
+        <dependency.slf4j.version>1.6.4</dependency.slf4j.version>
+    </properties>
+
+
+    <scm>
+        <connection>scm:git:git@github.com:stringaling/SplunkJavaLogging.git</connection>
+        <url>scm:git:git@github.com:stringaling/SplunkJavaLogging.git</url>
+        <developerConnection>scm:git:git@github.com:stringaling/SplunkJavaLogging.git</developerConnection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>art01</id>
+            <name>art01-releases</name>
+            <url>http://art01.corp.pingidentity.com:8080/artifactory/inhouse</url>
+        </repository>
+        <snapshotRepository>
+            <id>art01</id>
+            <name>art01-snapshots</name>
+            <url>http://art01.corp.pingidentity.com:8080/artifactory/inhouse</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${dependency.slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>${dependency.slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${dependency.slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.splunk</groupId>
+            <artifactId>splunk</artifactId>
+            <version>${dependency.splunk.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.splunk</groupId>
+            <artifactId>splunk-sdk</artifactId>
+            <version>${dependency.splunk.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>
