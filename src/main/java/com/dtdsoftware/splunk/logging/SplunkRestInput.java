@@ -7,7 +7,7 @@ import java.io.Writer;
 import java.net.Socket;
 
 import com.splunk.Args;
-import com.splunk.Receivers;
+import com.splunk.Receiver;
 import com.splunk.Service;
 
 /**
@@ -21,7 +21,7 @@ public class SplunkRestInput extends SplunkInput {
 
 	// Java SDK objects
 	private Service service;
-	private Receivers receivers;
+	private Receiver receiver;
 	private Args args;
 
 	// connection props
@@ -74,7 +74,7 @@ public class SplunkRestInput extends SplunkInput {
 
 		this.service = new Service(host, port);
 		this.service.login(user, pass);
-		this.receivers = new Receivers(this.service);
+		this.receiver = this.service.getReceiver();
 
 	}
 
@@ -85,9 +85,9 @@ public class SplunkRestInput extends SplunkInput {
 	 */
 	private void openStream() throws Exception {
 
-		if (this.receivers != null) {
+		if (this.receiver != null) {
 
-			this.streamSocket = this.receivers.attach(args);
+			this.streamSocket = this.receiver.attach(args);
 			this.ostream = streamSocket.getOutputStream();
 			this.writerOut = new OutputStreamWriter(ostream, "UTF8");
 
@@ -152,13 +152,13 @@ public class SplunkRestInput extends SplunkInput {
 
 		try {
 			if (streamSocket == null) {
-				this.receivers.submit(currentMessage, args);
+				this.receiver.submit(args, currentMessage);
 
 				// flush the queue
 				while (queueContainsEvents()) {
 					String messageOffQueue = dequeue();
 					currentMessage = messageOffQueue;
-					this.receivers.submit(currentMessage, args);
+					this.receiver.submit(args, currentMessage);
 				}
 			}
 		} catch (Exception e) {
